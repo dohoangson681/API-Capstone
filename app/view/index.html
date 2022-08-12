@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- FONT AWESOME  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- FONT GOOGLE  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;700&family=Inconsolata:wght@300&family=Montserrat:wght@300;400;500;600;700;800&family=Oswald:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500&family=Roboto:wght@100;300;400;500;700&family=Work+Sans:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- BOOTSTRAP 4  -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <!-- MAIN CSS  -->
+    <link rel="stylesheet" href="/assets/css/index.css" />
+    <link rel="stylesheet" href="/assets/css/modalForm.css">
+    <title>API CAPSTONE</title>
+  </head>
+  <body>
+    <header class="header">
+      <!-- CONTACT HEADER -->
+      <div class="contact_header d-flex justify-content-between container">
+        <ul class="contact_left">
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-phone"></i>
+              +0963-508-693
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-envelope"></i>
+              dohoangson060801@gmail.com
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-location-dot"></i>
+              Ha Noi - Viet Nam
+            </a>
+          </li>
+        </ul>
+        <ul class="contact_right">
+          <li>
+            <i class="fa-solid fa-language"></i>
+            VN
+          </li>
+          <li>
+            <i class="fa-solid fa-user"></i>
+            LOGIN
+          </li>
+        </ul>
+      </div>
+      <!-- SEARCH HEADER  -->
+    </header>
+    <div class="header__bottom">
+      <div class="search_header container">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="#">APhoneI</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="form-inline my-2 my-lg-0 m-auto">
+              <select id="selectProduct">
+                <option value="0">All Products</option>
+                <option value="1">Samsung</option>
+                <option value="2">Iphone</option>
+              </select>
+              <input
+                class="search_field form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btnSearch my-2 my-sm-0" type="button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
+          </div>
+          <div class="dropdown_cart">
+            <button type="button" class="btnCart">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <p>My Cart</p>
+            </button>
+            <div class="cart_content">
+              <table>
+                <thead><h3>List of Products</h3></thead>
+                <tbody id="cartItems"></tbody>
+              </table>
+              <p>Price : <span id="sumPrict">100$</span></p>
+              <button id="btnPurchse" class=" btn btn-success">Purchase</button>
+              <button id="btnClearCart" class=" btn btn-success">Clear</button>
+            </div>
+            <div class="cart_amount">
+              <p>3</p>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!-- NAVIGATION BAR  -->
+    <nav class="mainNavBar my-5">
+      <div class="mainNavbarContainer">
+        <nav class="navbar navbar-expand-lg navContentContainer">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav m-auto">
+              <a class="nav-link active" href="#">Home </a>
+              <a class="nav-link" href="#">Hot Deals</a>
+              <a class="nav-link" href="#">Categories</a>
+              <a class="nav-link" href="#">Laptops</a>
+              <a class="nav-link" href="#">Smartphones</a>
+              <a class="nav-link" href="#">Cameras</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </nav>
+    <!-- PRODUCTS  -->
+    <div class="product__container">
+      <div class="product__content container">
+        <div class="row">
+          <div class="col-3">
+            <div class="card cardStyle" >
+              <div class="cardImage">
+                <img src="/assets/img/Iphone_11.jpg" class="card-img-top cardImage" alt="..." />
+              </div>
+             
+              <div class="card-body">
+                <p class="product_Name">Iphone 11</p>
+                <p class="product_price">1000$</p>
+              </div>
+              <div class="btnCard">
+                <button class="btn btn-success">Buy now</button>
+                <button class="btn btn-success">Add to cart</button>
+              </div>
+              <div class="card_overlay">
+                <p class="screenProduct">screen 68</p>
+                <p class="backCam">Back Camera : 2 camera 12 MP</p>
+                <p class="frontCam">Front Camera : 7 MP</p>
+                <p class="descProduct">Thiết kế mang tính đột phá</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card cardStyle" >
+              <div class="cardImage">
+                <img src="/assets/img/samsunggalaxy_M51.jpg" class="card-img-top" alt="..." />
+              </div>
+              
+              <div class="card-body">
+                <p class="product_Name">Iphone 11</p>
+                <p class="product_price">1000$</p>
+              </div>
+              <div class="btnCard">
+                <button class="btn btn-success">Buy now</button>
+                <button class="btn btn-success">Add to cart</button>
+              </div>
+              <div class="card_overlay">
+                <p class="screenProduct">screen 68</p>
+                <p class="backCam">Back Camera : 2 camera 12 MP</p>
+                <p class="frontCam">Front Camera : 7 MP</p>
+                <p class="descProduct">Thiết kế mang tính đột phá</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card cardStyle" >
+              <div class="cardImage">
+                <img src="/assets/img/samsunggalaxy_M51.jpg" class="card-img-top" alt="..." />
+              </div>
+              
+              <div class="card-body">
+                <p class="product_Name">Iphone 11</p>
+                <p class="product_price">1000$</p>
+              </div>
+              <div class="btnCard">
+                <button class="btn btn-success">Buy now</button>
+                <button class="btn btn-success">Add to cart</button>
+              </div>
+              <div class="card_overlay">
+                <p class="screenProduct">screen 68</p>
+                <p class="backCam">Back Camera : 2 camera 12 MP</p>
+                <p class="frontCam">Front Camera : 7 MP</p>
+                <p class="descProduct">Thiết kế mang tính đột phá</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card cardStyle" >
+              <div class="cardImage">
+                <img src="/assets/img/Iphone_X.jpg" class="card-img-top" alt="..." />
+              </div>
+              
+              <div class="card-body">
+                <p class="product_Name">Iphone 11</p>
+                <p class="product_price">1000$</p>
+              </div>
+              <div class="btnCard">
+                <button class="btn btn-success">Buy now</button>
+                <button class="btn btn-success">Add to cart</button>
+              </div>
+              <div class="card_overlay">
+                <p class="screenProduct">screen 68</p>
+                <p class="backCam">Back Camera : 2 camera 12 MP</p>
+                <p class="frontCam">Front Camera : 7 MP</p>
+                <p class="descProduct">Thiết kế mang tính đột phá</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FOOTER  -->
+    <footer class="my-5"></footer>
+    <!-- modal purchase  -->
+    <div class="modal_purchase">
+      <div class="modal_purchaseForm">
+        <div class="modal_form">
+          <div class="row">
+            <div class="col-6 modal_left">
+              <div class="form-control">
+                <label for="username">User Name</label>
+                <input type="text" id="username">
+              </div>
+               <div class="form-control">
+                <label for="address">Address</label>
+                <input type="text" id="address">
+               </div>
+               <div class="form-control">
+                <label for="phonenumber">Phone Number</label>
+                <input type="text" id="phonenumber">
+               </div>
+               <div class="form-control">
+                <label for="userEmail">Email</label>
+                <input type="text" id="userEmail">
+               </div>
+            </div>
+            <div class="col-6 modal_right">
+              <h1>Your Order</h1>
+              <p >Product Name : 
+                <table>
+                  <tbody id="productList_modal"></tbody>
+                </table>
+              </p>
+              <p >Price : <span id="productPrice_modal" ></span></p>
+              <select id="selectPaymethod">
+                <option value="0">Choose pay method</option>
+                <option value="1"> Direct Bank Transfer</option>
+                <option value="2">Cash on Delivery</option>
+                <option value="3"> Paypal</option>
+              </select> <br>
+              <span id="spanTBMethod"></span>
+              <button id="btnPurchaseModal" class="btn btn-primary my-5">Purchase</button>
+            </div>
+          </div>
+          <button id="btnClose_modal">
+            <h1>X</h1>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- modal success  -->
+    <div class="modal_success">
+
+      <p> <i class="fa-solid fa-check"></i>   Purchase Successfully</p>
+    </div>
+    <!-- JS BOOTSTRAP 4  -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <!-- js  -->
+    <script src="../controllers/main.js"></script>
+  </body>
+</html>

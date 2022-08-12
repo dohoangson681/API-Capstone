@@ -1,0 +1,230 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+html , body {
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    position: relative;
+}
+.header {
+    background: #D65D42;
+    padding: 10px 0px;
+    color: white;
+}
+.contact_left , .contact_right {
+    margin: 0px;
+}
+.contact_left li , .contact_right li {
+    display: inline;
+    
+   
+}
+.contact_left li a {
+    font-size: 15px;
+    margin-right: 10px;
+    color: white;
+    text-decoration: none;
+}.contact_left li i {
+    color: #83EF2A;
+}
+.contact_right li{
+    margin-left: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.contact_right i {
+    color: #83EF2A;
+    margin-right: 5px;
+}
+.navbar-brand{
+    color: #D65D42;
+    font-weight: bold;
+    font-size: 50px !important;
+}
+.header__bottom {
+    background: #B1E586;
+}
+#selectProduct {
+   padding: 5px 10px;
+   border-radius: 10px 0px 0px 10px;
+    font-size: 19px;
+    border: none;
+    outline: none;
+}
+#selectProduct:focus {
+    border: none;
+    outline: none;
+}
+#selectProduct option {
+    color: black;
+    margin-bottom: 20px;
+}
+.search_field {
+    
+    border: 1px #B1E586 !important;
+    border-radius : 0px 8px 8px 0px !important; 
+    min-width: 400px;
+}
+.btnSearch {
+    background: white;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 7px;
+    color: #B1E586 ;
+    transition: all .5s;
+}
+.btnSearch:hover {
+    color: red;
+    font-size: 20px;
+
+}
+.btnCart {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #D65D42;
+    font-size: 20px;
+    transition: all .3s;
+    min-width: 100px ; 
+}
+
+.dropdown_cart {
+    position: relative;
+}
+.cart_content {
+    position: absolute;
+    min-width: 300px;
+    background: #46890F;
+    padding: 10px 5px;
+    border-radius: 8px;
+    top: 0px;
+    left: 0px;
+    border-radius: 8px;
+    top: 65px;
+    left: -75px;
+    text-align: center;
+    color: white;
+    display: none;
+    transition: all .3s;
+}
+.dropdown_cart:hover .cart_content {
+   display: block;
+   z-index: 15;
+}
+.cart_amount {
+    position: absolute;
+    color: #46890F;
+    background:white;
+    border-radius: 50% ;
+    top: -10px;
+    left: 62px;
+    padding: 10px 10px;
+    width: 30px;
+    height: 30px;
+    line-height: 10px;
+}
+.navContentContainer {
+    background: #fff;
+    border-bottom: 2px solid #e4e7ed;
+    border-top: 1px solid #d10024;
+
+}
+.nav-link {
+    color: #2D3229;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0px 5px;
+    transition: all .5s;
+}
+.nav-link::after {
+    display: block;
+    content: "";
+    width: 0;
+    height: 2px;
+    background: #4976F9;
+    transition: all .5s;
+}
+.nav-link.active {
+    color: #4976F9;
+}
+.nav-link.active::after {
+    display: block;
+    content: "";
+    width: 100%;
+    height: 2px;
+    background: #4976F9;
+    transition: all .5s;
+}
+
+.nav-link:hover:after{
+    width: 100%;
+    color: #4976F9;
+}
+/* PRODUCT  */
+.product__container .cardStyle {
+    padding: 10px;
+    /* border: 1px solid #46890F; */
+    border-radius: 10px;
+    /* box-shadow: 4px 2px 4px 4px rgba(255, 255, 255, 0.636) ; */
+    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.504) ;
+    position: relative;
+}
+.card-body {
+    font-weight: bold;
+    color: #46890F;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.btnCard {
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 1px solid #46890F;
+    padding-top: 20px;
+}
+.card_overlay {
+    position: absolute;
+    background: url("../img/Iphone_11.jpg");
+    background-size: 120%;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    font-size: 20px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    transition: all .5s;
+    text-align: center;
+    padding: 70px 15px;
+    transform: scale(0);
+  
+}
+.cardImage {
+    cursor: pointer;
+    z-index: 10;
+    opacity: 1;
+    transition: all .5s;
+}
+.cardImage:hover {
+    opacity: 0;
+}
+.cardImage:hover ~ .card_overlay {
+    transform: scale(1);
+    
+}
+.cardImage:hover ~ .card-body , .cardImage:hover ~ .btnCard {
+    opacity: 0;
+}
+/* modal purchase  */
+
+
+
+
