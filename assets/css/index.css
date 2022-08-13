@@ -175,13 +175,15 @@ body {
     /* box-shadow: 4px 2px 4px 4px rgba(255, 255, 255, 0.636) ; */
     box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.504) ;
     position: relative;
+    min-height: 30vh;
 }
 .card-body {
     font-weight: bold;
     color: #46890F;
-    font-size: 20px;
+    font-size: 16px;
     display: flex;
     justify-content: space-between;
+    min-height: 100px;
 }
 .btnCard {
     display: flex;
@@ -191,10 +193,10 @@ body {
 }
 .card_overlay {
     position: absolute;
-    background: url("../img/Iphone_11.jpg");
+    /* background: linear-gradient(to top, #333300 0%, #ff99cc 109%);
     background-size: 120%;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center; */
     color: white;
     font-size: 20px;
     top: 0px;

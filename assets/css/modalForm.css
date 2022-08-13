@@ -32,6 +32,10 @@
     min-width: 300px;
     padding: 3px 0px 3px 5px;
     margin-bottom: 10px;
+    transition: all .5s;
+}
+.form-control input:focus {
+    box-shadow: 2px 5px 16px 0px #0B325E ;
 }
 .modal_purchaseForm {
     position: relative;
@@ -65,4 +69,11 @@
 }
 .show_modalSuccess {
     transform: translateY(0);
+}
+#btnPurchaseModal {
+    transition: all .6s;
+}
+#btnPurchaseModal:hover {
+    box-shadow: 25px 25px 0px 0px #E1EEFF;
+    transform: translateY(-10px);
 }

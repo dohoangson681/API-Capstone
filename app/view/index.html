@@ -154,7 +154,7 @@
     <!-- PRODUCTS  -->
     <div class="product__container">
       <div class="product__content container">
-        <div class="row">
+        <div class="row" id="productItemsAll">
           <div class="col-3">
             <div class="card cardStyle" >
               <div class="cardImage">
@@ -254,19 +254,19 @@
         <div class="modal_form">
           <div class="row">
             <div class="col-6 modal_left">
-              <div class="form-control">
+              <div class="form-control mb-4">
                 <label for="username">User Name</label>
                 <input type="text" id="username">
               </div>
-               <div class="form-control">
+               <div class="form-control mb-4">
                 <label for="address">Address</label>
                 <input type="text" id="address">
                </div>
-               <div class="form-control">
+               <div class="form-control mb-4">
                 <label for="phonenumber">Phone Number</label>
                 <input type="text" id="phonenumber">
                </div>
-               <div class="form-control">
+               <div class="form-control mb-4">
                 <label for="userEmail">Email</label>
                 <input type="text" id="userEmail">
                </div>
@@ -303,7 +303,10 @@
     <!-- JS BOOTSTRAP 4  -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <!-- Axios Lib  -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- js  -->
+    <script src="/app/services/SanPhamService.js"></script>
     <script src="../controllers/main.js"></script>
   </body>
 </html>
