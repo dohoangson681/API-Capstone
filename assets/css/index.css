@@ -129,7 +129,14 @@ body {
     width: 30px;
     height: 30px;
     line-height: 10px;
+    display: none;
 }
+.sumPrice {
+    display: none;
+}
+/* .cart_amout.show {
+    display: block;
+} */
 .navContentContainer {
     background: #fff;
     border-bottom: 2px solid #e4e7ed;
