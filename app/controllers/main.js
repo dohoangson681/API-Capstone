@@ -7,29 +7,7 @@ var cartContent = [];
 function getELE(id) {
   return document.getElementById(id);
 }
-getELE("btnPurchse").onclick = function () {
-  document.querySelector(".modal_purchase").style.transform = "scale(1)";
-  document.querySelector(".modal_purchaseForm").style.transform =
-    "translateY(0)";
-  // console.log(document.querySelector(".modal_purchase")) ;
-};
-getELE("btnClose_modal").onclick = function () {
-  document.querySelector(".modal_purchase").style.transform = "scale(0)";
-  document.querySelector(".modal_purchaseForm").style.transform =
-    "translateY(-150%)";
-};
-getELE("btnPurchaseModal").onclick = function () {
-  document.querySelector(".modal_purchase").style.transform = "scale(0)";
-  document.querySelector(".modal_purchaseForm").style.transform =
-    "translateY(-150%)";
 
-  document.querySelector(".modal_success").classList.add("show_modalSuccess");
-  setTimeout(function () {
-    document
-      .querySelector(".modal_success")
-      .classList.remove("show_modalSuccess");
-  }, 1000);
-};
 function getAPI() {
   spService
     .getAPI()
@@ -241,12 +219,20 @@ function renderCart(tongPrice) {
   getELE("sumPrict").innerHTML = `${tongPrice} $` ; 
 }
 function clearCart() {
+  if(cartContent.length == 0){
+    getELE("cartItems").innerHTML = `<h3>Đã chọn mua cđg đâu mà đòi clear</h3>` ; 
+      setTimeout(function(){
+      getELE("cartItems").innerHTML = "" ; 
+      },2000)
+  }else {
     document.querySelector(".cart_amount").innerHTML = "0";
     document.querySelector(".cart_amount").style.display = "none";
     document.querySelector(".sumPrice").style.display = "none" ; 
     cartContent = [] ; 
     setLocalStorage(cartContent) ; 
     renderCart(0) ;
+  }
+    
 
   }
 getELE("btnClearCart").onclick = clearCart;
