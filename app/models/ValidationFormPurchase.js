@@ -28,7 +28,7 @@ function ValidationFormModal() {
         }
     }
     this.checkUserName = function(inputValue , idSpanTB , message){
-        var patternUsername = /"^[a-z A-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\\s]+$"/;
+        var patternUsername = /[A-Za-z\s]+$/;
         if(inputValue.match(patternUsername)){
             getELE(idSpanTB).style.display = "none" ; 
             getELE(idSpanTB).innerHTML = "" ;
