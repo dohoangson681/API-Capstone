@@ -1,5 +1,4 @@
 function ProductService() {
-    // get data
     this.getAPI = function(){
         var promise = axios({
           method: 'get',
@@ -7,7 +6,6 @@ function ProductService() {
         })
         return promise ; 
     }
-    // add new data (post)
     this.addAPI = function(phoneObject){
         var promise = axios({
             method: 'post',
@@ -16,7 +14,6 @@ function ProductService() {
           });
           return promise ; 
     }
-    // delete product (delete)
     this.deleteAPI = function(name){
         var promise = axios({
             method: 'delete',
@@ -24,7 +21,6 @@ function ProductService() {
           });
           return promise ; 
     }
-    // get prodcut by id of product
     this.getProduct = function(id){
         var promise = axios({
             method: 'get',
@@ -32,7 +28,6 @@ function ProductService() {
           })
           return promise ; 
     }
-    // update product by id of product
     this.updateProduct = function(id , phoneObject){
         var promise = axios({
             method: 'put',

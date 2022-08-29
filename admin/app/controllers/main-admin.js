@@ -3,17 +3,14 @@ var spService = new ProductService() ;
 function getELE(id){
     return document.getElementById(id) ; 
 }
-// get data from API and show on UI
 function getAPI() {
     spService.getAPI().then(function(success){
-        
         showUI(success.data) ;
     }).catch(function(error){
         console.log(error) ; 
     })
 }
-getAPI() ; 
-// show UI
+getAPI() ;
 function showUI(arr) {
     var content = "" ; 
     var stt = 0 ; 
@@ -94,25 +91,16 @@ function addProduct() {
     
 }
 getELE("btnAddNewProduct").onclick = addProduct ; 
-// delete product
 function deleteProduct(id) {
-   
-    // spService.deleteAPI(name).then(function(success){
-    //     getAPI() ; 
-    // }).catch(function(error){
-    //     console.log(error) ; 
-    // })
     spService.deleteAPI(id).then(function(success){
         getAPI() ; 
     }).catch(function(error){
         console.log(error) ;
     })
 }
-// details 
 function productDetaisl(id) {
     spService.getProduct(id)
     .then(function(result){
-        // console.log(result.data) ; 
         var phoneObject = result.data ; 
         getELE("TenSP").value = phoneObject.name;
         getELE("GiaSP").value = phoneObject.price;
@@ -134,7 +122,6 @@ function productDetaisl(id) {
 
 function resetModal(){
     var modalEle = document.querySelectorAll(".form-control") ; 
-    console.log(modalEle) ; 
     for(var i = 0 ; i < modalEle.length ; i++){
         modalEle[i].value = "" ; 
     }
@@ -183,17 +170,3 @@ function toNonAccentVietnamese(str) {
     str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // Â, Ê, Ă, Ơ, Ư
     return str;
 }
-
-
-
-
-
-
-
-
-// create add product button
-// function formHandle() {
-//     document.querySelector(".modal-footer").innerHTML = 
-//     `<button data-dismiss="modal" onclick = "addProduct()" class = "btn btn-success">Add</button>` ; 
-//     resetModal() ; 
-// }

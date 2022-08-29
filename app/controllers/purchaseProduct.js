@@ -54,16 +54,8 @@ getELE("btnPurchse").onclick = function () {
    isValid &= validationmodal.checkEmpty(email , "TBuserEmail" ,arrTBModal[3] ) && validationmodal.checkUserEmail(email , "TBuserEmail" ,arrTBModalValid[3]) ; 
 
    isValid &= validationmodal.checkSelectPayMethod("selectPaymethod","spanTBMethod" , arrTBModal[4] ) ;
-  //  console.log(validationmodal.checkEmpty("selectPaymethod"   , "spanTBMethod" ,arrTBModal[4] )) ; 
   var select = getELE("selectPaymethod").selectedIndex  ; 
-  console.log(select) ; 
-
-
-
-
-
-
-    if(isValid){
+  if(isValid){
       getELE("btnClose_modal").click() ; 
       document.querySelector(".modal_success").classList.add("show_modalSuccess");
       setTimeout(function () {
@@ -71,8 +63,6 @@ getELE("btnPurchse").onclick = function () {
           .querySelector(".modal_success")
           .classList.remove("show_modalSuccess");
       }, 1000);
-      // clear gio hang
-      // set local ve 0
       clearCart() ;
     }
      
@@ -90,7 +80,6 @@ function showListProductModal() {
   getELE("productList_modal").innerHTML = content ; 
   getELE("productPrice_modal").innerHTML = `${sumPrice()} $`  ; 
 }
-// reset form
 function resetFormModal() {
     var inputElesModal = document.querySelectorAll(".form-control input") ; 
     for (var i = 0; i  < inputElesModal.length; i++) {

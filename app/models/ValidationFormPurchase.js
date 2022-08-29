@@ -12,9 +12,6 @@ function ValidationFormModal() {
     }
     this.checkSelectPayMethod = function(idSelect  , idSpanTB , message){
         var select = getELE(idSelect) ; 
-        // var select = getELE(idSelect).selectedIndex  ;
-        console.log(select); 
-        console.log(select.selectedIndex );
         if(select.selectedIndex != 0 ){
             getELE(idSpanTB).style.display = "none" ; 
             getELE(idSpanTB).innerHTML = "" ;

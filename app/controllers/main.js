@@ -1,9 +1,6 @@
 var spService = new SanPhamService();
-// var btnAddToCart ;
 var productAmountInCart = 0;
-// khởi tạo 1 giỏ hàng ko có gì bên trong :D
 var cartContent = [];
-
 function getELE(id) {
   return document.getElementById(id);
 }
@@ -14,8 +11,6 @@ function getAPI() {
     .then(function (success) {
       showUI(success.data);
       overlayCard(success.data);
-      // sau khi tai dc du lieu len UI thi lay tat ca cac btn
-      // btnAddToCart = document.querySelectorAll(".btnAddToCart") ;
     })
     .catch(function (error) {
       console.log(error);
@@ -63,26 +58,17 @@ function overlayCard(arr) {
     overlayEle[idx].style.backgroundPosition = "center";
   });
 }
-// search by select
 function phoneCategory() {
-  // dùng get method để lấy tất cả dữ liệu ra và gán vào 1 mảng
   spService
     .getAPI()
     .then(function (success) {
-      // console.log(success) ;
       var productArr = success.data;
-      // console.log(productArr);
-      // sau khi lay dc mang gia tri  , tao mot mang moi rong de chua cac object can search va show len UI
       var seachArray = [];
-      // dung map de duyet mang , neu phan tu nao cua mang thoa man thi push object do vao trong mang
       var seachKey = getELE("selectProduct").value;
-      // console.log(seachKey) ;
       if (seachKey === "0") {
-        // nếu user muốn xem tất cả sản phẩm thì showUI mảng lấy đc từ API
         showUI(productArr);
         overlayCard(productArr);
       } else if (seachKey === "1") {
-        // nếu người dùng muốn xem các sản phẩm của Samsung
         productArr.map(function (objectProduct) {
           if (objectProduct.type.toLowerCase() === "samsung")
             seachArray.push(objectProduct);
@@ -97,7 +83,6 @@ function phoneCategory() {
         showUI(seachArray);
         overlayCard(seachArray);
       }
-      // console.log("seachArray" , seachArray) ;
     })
     .catch(function (error) {
       console.log(error);
@@ -106,51 +91,35 @@ function phoneCategory() {
 function addToCart(id) {
   document.querySelector(".cart_amount").innerHTML = `${++productAmountInCart}`;
   document.querySelector(".cart_amount").style.display = "block";
-  // truyền id vào hàm addToCart(id) để dùng axios get object có id tương về
-  // kiểm tra trong mảng cartContent đã có sản phẩm có id tương ứng hay chưa , nếu chưa có thì push object có id tương ứng cùng với amout là 1 (nếu đã có thì ko push nữa mà tăng amount của object có id tương ứng lên 1 đơn vị)
-  
   spService
     .getProduct(id)
     .then(function (success) {
-      // lấy thành công được data để chuẩn bị kiểm tra và push vào mảng
       var objectPhone = success.data;
-      // kiểm tra mảng giỏ hàng rỗng hay ko , nếu rỗng thì object vào
       if (cartContent.length == 0) {
         var cartItem = new CartItem(objectPhone, 1);
         cartContent.push(cartItem);
       } else {
-        // nếu trong giỏ hàng đã có sản phẩm , kiểm tra xem đã có sản phẩm có id tương ứng hay chưa , nếu chưa có thì push vào với amount là 1 , nếu có rồi thì tăng amount lên 1 đơn vị
         var isExist = false;
         cartContent.some(function (objectPhone) {
           if (objectPhone.objectSP.id === id) {
             isExist = true;
           }
         });
-        
-        // nếu isExist true => sản phẩm đã tồn tại trong giỏ hàng do đó không push nữa mac chỉ tăng amount lên 1 đơn vị
         if (isExist) {
-          // tăng amount lên 1 đơn vị
-          // trước khi tăng cần tìm xem sản phẩm đó nằm ở vị trí nào trong mảng
           var viTri = -1;
           cartContent.map(function (objectPhone, index) {
             if (objectPhone.objectSP.id == id) viTri = index;
           });
-          // var cartItem = new CartItem(objectPhone , 1) ;
-          // cartContent.push(cartItem) ;
           cartContent[viTri].amountSP = ++cartContent[viTri].amountSP;
          
         } else {
-          // push vào mảng với amount là 1
           var cartItem = new CartItem(objectPhone, 1);
           cartContent.push(cartItem);
          
         }
       }
-      // tính tổng tiền
       var tongPrice = sumPrice();
       
-      // 12h51-8/15/2022 đã xong tính tổng và cartContent
-      // tiếp theo là show lên cart
       renderCart(tongPrice) ; 
       document.querySelector(".sumPrice").style.display = "block" ; 
       setLocalStorage(cartContent) ; 
@@ -159,21 +128,6 @@ function addToCart(id) {
       console.log(error);
     });
 }
-// khi nguoi dung nhan vao clear thi set productAmount ve 0
-
-
-// var myObject = {
-//     age : "23" ,
-//     name : "Son"
-// }
-// var contentObject = {
-//     object : myObject,
-//     number : "1"
-// }
-// console.log(contentObject) ;
-// console.log(contentObject.object) ;
-// console.log(contentObject.object.age) ;
-// console.log(contentObject.object.name) ;
 function sumPrice() {
   var sum = 0;
   cartContent.map(function (objectPhone) {
@@ -182,12 +136,7 @@ function sumPrice() {
   });
   return sum;
 }
-// var price = "10.99$" ;
-// price = Number(price.replace("$" , ""));
-
-// console.log(price, typeof(price)) ;
 function renderCart(tongPrice) {
-  // đầu tiền là đưa các giá trị như tên sản phẩm , giá sản phẩm , số lượng sản phẩm lên UI
   var content = "";
   cartContent.map(function (objectPhone) {
     content += `
@@ -220,7 +169,7 @@ function renderCart(tongPrice) {
 }
 function clearCart() {
   if(cartContent.length == 0){
-    getELE("cartItems").innerHTML = `<h3>Đã chọn mua cđg đâu mà đòi clear</h3>` ; 
+    getELE("cartItems").innerHTML = `<h3>Đã chọn mua đâu mà đòi clear</h3>` ; 
       setTimeout(function(){
       getELE("cartItems").innerHTML = "" ; 
       },2000)
@@ -237,10 +186,6 @@ function clearCart() {
   }
 getELE("btnClearCart").onclick = clearCart;
 
-
-
-
-// next store in local
 function setLocalStorage(arr) {
     localStorage.setItem("Cart List" , JSON.stringify(arr)) ; 
 }
@@ -256,19 +201,11 @@ function getLocalStorage() {
     }
 }
 getLocalStorage() ; 
-// xóa sản phẩm khỏi giỏ hàng
 function removeProductFromCart(id) {
-    /**
-     * B1 : Truyền id vào trong hàm remove
-     * B2 : dựa vào id tìm xem vị trí của sản phẩm có id tương ứng nằm ở index nào trong mảng cartContent
-     * B3 : dùng hàm splice() để xóa phần tử có idx tương ứng 
-     * B4 : gọi hàm renderCart để show lại giỏ hàng , tính lại giá tiền và set lại localStorage
-     */
     var viTri = -1  ;
     cartContent.map(function(objectProduct , index){
       if(objectProduct.objectSP.id == id) viTri = index ; 
     })
-    // console.log("viTri" , viTri) ; 
     if(viTri > -1){
       cartContent.splice(viTri , 1) ; 
     var tongTien = sumPrice() ; 
@@ -279,28 +216,18 @@ function removeProductFromCart(id) {
     }
     
 }
-// tăng số lương sản phẩm trong giỏ hàng lên 1 
 function increaseProductCart(id) {
   var viTri = -1 ; 
   cartContent.map(function(objectProduct , index){
     if(objectProduct.objectSP.id == id) viTri = index ; 
   })
-  // lấy amount hiện tại của sản phầm và tăng lên 1
   var amountNow = cartContent[viTri].amountSP ; 
-  console.log(amountNow) ; 
   amountNow = ++amountNow ; 
-  cartContent[viTri].amountSP = amountNow ; 
-  // console.log(cartContent[viTri].amountSP) ; 
-  // sau khi tăng được số lương sản phẩm thì sẽ hiện thì số lượng lên giao diện và tính lại giá tiền và hiện thị lên giao diện và setlocal
+  cartContent[viTri].amountSP = amountNow ;
   getELE("productAmount").innerHTML = cartContent[viTri].amountSP ; 
-  // tính tiền
   var tongTien = sumPrice() ; 
-  // renderCart
   renderCart(tongTien)  ; 
-  // set local
   setLocalStorage(cartContent) ; 
-
-
 }
 function decreaseProductCart(id) {
   var viTri = -1 ; 
@@ -308,16 +235,11 @@ function decreaseProductCart(id) {
     if(objectProduct.objectSP.id == id) viTri = index ; 
   })
   var amountNow = cartContent[viTri].amountSP ; 
-  console.log(amountNow) ; 
   amountNow = --amountNow ; 
   cartContent[viTri].amountSP = amountNow ; 
-  
   getELE("productAmount").innerHTML = cartContent[viTri].amountSP ; 
-  // tính tiền
   var tongTien = sumPrice() ; 
-  // renderCart
   renderCart(tongTien)  ; 
-  // set local
   setLocalStorage(cartContent) ; 
 }
 
