@@ -1,5 +1,5 @@
 var spService = new SanPhamService();
-var productAmountInCart = 0;
+var productAmountInCart = Number(document.getElementById("itemsInCart").innerHTML);
 var cartContent = [];
 function getELE(id) {
   return document.getElementById(id);
@@ -36,10 +36,7 @@ function showUI(arr) {
                 <button onclick = "addToCart('${objectProduct.id}')" class="btn btn-success btnAddToCart">Add to cart</button>
               </div>
               <div class="card_overlay">
-                <p class="screenProduct">${objectProduct.screen}</p>
-                <p class="backCam">Back Camera : ${objectProduct.backCamera}</p>
-                <p class="frontCam">Front Camera : ${objectProduct.frontCamera}</p>
-                <p class="descProduct">${objectProduct.desc}</p>
+                
               </div>
             </div>
           </div>
@@ -169,7 +166,7 @@ function renderCart(tongPrice) {
 }
 function clearCart() {
   if(cartContent.length == 0){
-    getELE("cartItems").innerHTML = `<h3>Đã chọn mua đâu mà đòi clear</h3>` ; 
+    getELE("cartItems").innerHTML = `<h3>Giỏ hàng trống !</h3>` ; 
       setTimeout(function(){
       getELE("cartItems").innerHTML = "" ; 
       },2000)
@@ -195,9 +192,21 @@ function getLocalStorage() {
          var tongPrice = sumPrice() ; 
          renderCart(tongPrice) ; 
          document.querySelector(".sumPrice").style.display = "block" ;
+         
     }else {
         cartContent = [] ; 
         document.querySelector(".sumPrice").style.display = "none" ;
+       
+    }
+    if(cartContent.length == 0){
+      document.querySelector(".cart_amount").style.display = "none" ; 
+    }else{
+          var productAmountInCart = 0 ; 
+          cartContent.forEach((product)=>{
+          productAmountInCart += product.amountSP ; 
+          });
+          document.querySelector(".cart_amount").innerHTML = productAmountInCart ; 
+          document.querySelector(".cart_amount").style.display = "block" ;
     }
 }
 getLocalStorage() ; 
@@ -206,15 +215,62 @@ function removeProductFromCart(id) {
     cartContent.map(function(objectProduct , index){
       if(objectProduct.objectSP.id == id) viTri = index ; 
     })
-    if(viTri > -1){
-      cartContent.splice(viTri , 1) ; 
-    var tongTien = sumPrice() ; 
-    renderCart(tongTien) ; 
-    setLocalStorage(cartContent) ; 
-    }else {
-      alert("Lỗi cmnr !") ; 
-    }
+  //  var isCartEmpty = cartContent.every((product)=> {
+  //     return product.amountSP == 0 ; 
+  //  })
+  //  if(isCartEmpty){
+  //   document.querySelector(".cart_amount").innerHTML = 0 ; 
+  //   document.querySelector(".cart_amount").style.display = "none" ;
+  //     clearCart() ; 
+  //   var tongTien = sumPrice() ; 
+  //   renderCart(tongTien) ; 
+  //   setLocalStorage(cartContent) ; 
+  //  }else{
+   
+  //   var productAmountInCart = 0 ; 
+  //   cartContent.forEach((product)=>{
+  //     productAmountInCart += product.amountSP ; 
+  //   });
+  //   document.querySelector(".cart_amount").innerHTML = productAmountInCart ; 
+  //   document.querySelector(".cart_amount").style.display = "block" ;
+  //             if(viTri > -1){
+  //                     cartContent.splice(viTri , 1) ; 
+  //                   var tongTien = sumPrice() ; 
+  //                   renderCart(tongTien) ; 
+  //                   setLocalStorage(cartContent) ; 
+  //             }else {
+  //                    alert("Lỗi cmnr !") ; 
+  //             }
+  //  }
     
+
+    // if(viTri > -1){
+    //   cartContent.splice(viTri , 1) ; 
+    // var tongTien = sumPrice() ; 
+    // renderCart(tongTien) ; 
+    // setLocalStorage(cartContent) ; 
+    // }else {
+    //   alert("Lỗi cmnr !") ; 
+    // }
+    if(cartContent.length == 1){
+      clearCart() ; 
+
+    }else{
+      if(viTri > -1){
+          cartContent.splice(viTri , 1) ; 
+          var tongTien = sumPrice() ; 
+          var productAmountInCart = 0 ; 
+          cartContent.forEach((product)=>{
+          productAmountInCart += product.amountSP ; 
+          });
+          document.querySelector(".cart_amount").innerHTML = productAmountInCart ; 
+          document.querySelector(".cart_amount").style.display = "block" ;
+          renderCart(tongTien) ; 
+          setLocalStorage(cartContent) ; 
+      }else {
+          alert("Lỗi cmnr !") ; 
+      }
+    }   
 }
 function increaseProductCart(id) {
   var viTri = -1 ; 
@@ -225,9 +281,16 @@ function increaseProductCart(id) {
   amountNow = ++amountNow ; 
   cartContent[viTri].amountSP = amountNow ;
   getELE("productAmount").innerHTML = cartContent[viTri].amountSP ; 
-  var tongTien = sumPrice() ; 
+  var tongTien = sumPrice() ;
+   
+  var productAmountInCart = 0 ; 
+  cartContent.forEach((product)=>{
+    productAmountInCart += product.amountSP ; 
+  });
+  document.querySelector(".cart_amount").innerHTML = productAmountInCart ; 
+  document.querySelector(".cart_amount").style.display = "block" ; 
   renderCart(tongTien)  ; 
-  setLocalStorage(cartContent) ; 
+  setLocalStorage(cartContent) ;
 }
 function decreaseProductCart(id) {
   var viTri = -1 ; 
@@ -236,10 +299,38 @@ function decreaseProductCart(id) {
   })
   var amountNow = cartContent[viTri].amountSP ; 
   amountNow = --amountNow ; 
-  cartContent[viTri].amountSP = amountNow ; 
-  getELE("productAmount").innerHTML = cartContent[viTri].amountSP ; 
-  var tongTien = sumPrice() ; 
-  renderCart(tongTien)  ; 
-  setLocalStorage(cartContent) ; 
+  if(amountNow <= 0 ){
+    cartContent.splice(viTri , 1) ; 
+    var tongTienDecrease = sumPrice() ; 
+    renderCart(tongTienDecrease) ; 
+    
+  }else{
+    cartContent[viTri].amountSP = amountNow ; 
+    getELE("productAmount").innerHTML = cartContent[viTri].amountSP ; 
+    var tongTien = sumPrice() ; 
+  }
+ 
+  
+  
+  var productAmountInCart = 0 ; 
+  var isCartEmpty = cartContent.every((product)=>{
+        return product.amountSP <= 0 ;
+  })
+  console.log(isCartEmpty) ; 
+  if(isCartEmpty){
+    clearCart() ; 
+    document.querySelector(".cart_amount").innerHTML = productAmountInCart ; 
+    document.querySelector(".cart_amount").style.display = "none" ;
+    setLocalStorage(cartContent) ; 
+  }else {
+      cartContent.forEach((product)=>{
+      productAmountInCart += product.amountSP ; 
+    });
+    document.querySelector(".cart_amount").innerHTML = productAmountInCart ; 
+    document.querySelector(".cart_amount").style.display = "block" ; 
+    renderCart(tongTien)  ; 
+    setLocalStorage(cartContent) ; 
+  }
+  
+  
 }
-

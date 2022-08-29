@@ -37,7 +37,6 @@ getELE("btnPurchse").onclick = function () {
       "translateY(-150%)";
   };
   getELE("btnPurchaseModal").onclick = function () {
-    // var validationModal = new ValidationFormModal() ; 
     var isValid = true ; 
     var username = getELE("username").value ; 
     var address = getELE("address").value ;
