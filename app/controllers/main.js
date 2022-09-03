@@ -186,9 +186,34 @@ getELE("btnClearCart").onclick = clearCart;
 function setLocalStorage(arr) {
     localStorage.setItem("Cart List" , JSON.stringify(arr)) ; 
 }
+// GET LOCAL STORAGE
 function getLocalStorage() {
-    if(localStorage.getItem("Cart List") != null){
+  // get all products from api then save them in an array
+    var listOfProduct = [] ; 
+    spService.getAPI().then((success)=>{
+      // real data
+      listOfProduct = [...success.data] ; 
+      console.log(listOfProduct) ;
+      
+      if(localStorage.getItem("Cart List") != null){
         cartContent = JSON.parse(localStorage.getItem("Cart List")) ; 
+        console.log(cartContent) ; // data stored in local
+        for(let i = 0 ; i < cartContent.length; i++ ){
+          var id = cartContent[i].objectSP.id ; // id cua sp hien tai
+          // var spInCart =  cartContent[i] ; 
+          listOfProduct.some((phone)=>{
+            if( phone.id == cartContent[i].objectSP.id ) cartContent[i].objectSP = {...phone}
+          }) 
+        }
+        console.log(cartContent) ; 
+
+
+
+
+
+
+
+        
          var tongPrice = sumPrice() ; 
          renderCart(tongPrice) ; 
          document.querySelector(".sumPrice").style.display = "block" ;
@@ -208,6 +233,18 @@ function getLocalStorage() {
           document.querySelector(".cart_amount").innerHTML = productAmountInCart ; 
           document.querySelector(".cart_amount").style.display = "block" ;
     }
+
+
+
+
+
+
+
+
+    }).catch((err)=>{
+      console.log(err) ; 
+    }) ; 
+
 }
 getLocalStorage() ; 
 function removeProductFromCart(id) {

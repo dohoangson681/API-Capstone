@@ -44,7 +44,6 @@ function showUI(arr) {
 getELE("btnThemSP").addEventListener("click" , function(){
     resetModal() ; 
     getELE("btnAddNewProduct").style.display = "block" ; 
-    getELE("btnUpdateProduct").style.display = "none" ;
     document.querySelector(".modal-title").innerHTML = "New Products" ; 
     
 }) ; 
@@ -77,7 +76,9 @@ function addProduct() {
     isValid &= validation.checkEmpty(desc, "TBDesc" , arrTbEmpty[6] ) ;
     // check type
     isValid &= validation.checkEmpty(type, "TBType" , arrTbEmpty[7] ) && validation.checkHopLe(type, "TBType" , arrTbValida[5]);
+    
     if(isValid){
+        
         getELE("btnAddNewProduct").dataset.dismiss = "modal" ; 
         var phoneObject = new PhoneProduct(tenSP , price , screen , backCamera , frontCamera , img , desc , type) ; 
         spService.addAPI(phoneObject).then(function(success){
@@ -101,6 +102,7 @@ function deleteProduct(id) {
 function productDetaisl(id) {
     spService.getProduct(id)
     .then(function(result){
+        console.log(id) ; 
         var phoneObject = result.data ; 
         getELE("TenSP").value = phoneObject.name;
         getELE("GiaSP").value = phoneObject.price;
@@ -110,10 +112,12 @@ function productDetaisl(id) {
         getELE("img").value = phoneObject.img;
         getELE("description").value = phoneObject.desc;
         getELE("productType").value = phoneObject.type;
-        getELE("btnAddNewProduct").style.display = "none" ; 
-        getELE("btnUpdateProduct").style.display = "block" ;
+        // getELE("btnAddNewProduct").style.display = "none" ; 
+        // getELE("btnUpdateProduct").style.display = "block" ;
         document.querySelector(".modal-title").innerHTML = "Product Details" ;
-
+        document.querySelector(".modal-footer").innerHTML = `
+        <button onclick = "updateAPI('${id}')" id="btnUpdateProduct" class="btn btn-success">Update</button>
+        ` ; 
     })
     .catch(function(error){
         console.log(error) ; 
@@ -140,14 +144,40 @@ function updateAPI(id) {
     var img = getELE("img").value ;
     var desc = getELE("description").value ;
     var type = getELE("productType").value;
-    var phoneObject = new PhoneProduct(tenSP , price , screen , backCamera , frontCamera , img , desc , type) ; 
-    spService.updateProduct(id , phoneObject)
-    .then(function(success){
-        getAPI() ; 
-    })
-    .catch(function(error){
+
+
+    // validation
+    var validation = new Validation() ; 
+    var isValid = true;
+    // check nameSP
+    isValid &= validation.checkEmpty(tenSP , "TBTenSp" , arrTbEmpty[0] ) && validation.checkHopLe(tenSP , "TBTenSp" , arrTbValida[0]) ; 
+    // check Price
+    isValid &= validation.checkEmpty(price , "TBPrice" , arrTbEmpty[1] ) && validation.checkPrice(price , "TBPrice" , arrTbValida[1]);
+    // check screen
+    isValid &= validation.checkEmpty(screen , "TBScreen" , arrTbEmpty[2] ) && validation.checkHopLe(screen , "TBScreen" , arrTbValida[2]) ;
+    // check back camera
+    isValid &= validation.checkEmpty(backCamera , "TBBackCam" , arrTbEmpty[3] ) && validation.checkHopLe(backCamera , "TBBackCam" , arrTbValida[3]);
+    // check front camera
+    isValid &= validation.checkEmpty(frontCamera, "TBImg" , arrTbEmpty[4] ) && validation.checkHopLe(frontCamera, "TBImg" , arrTbValida[4]) ;
+    // check img
+    isValid &= validation.checkEmpty(img, "TBFrontCam" , arrTbEmpty[5] ) ;
+    // check desc
+    isValid &= validation.checkEmpty(desc, "TBDesc" , arrTbEmpty[6] ) ;
+    // check type
+    isValid &= validation.checkEmpty(type, "TBType" , arrTbEmpty[7] ) && validation.checkHopLe(type, "TBType" , arrTbValida[5]);
+    console.log(isValid) ; 
+    if(isValid){
+        document.querySelector(".close").click() ; 
+        var phoneObject = new PhoneProduct(tenSP , price , screen , backCamera , frontCamera , img , desc , type) ; 
+        spService.updateProduct(id , phoneObject)
+        .then(function(success){
+            getAPI() ; 
+        })
+        .catch(function(error){
         console.log(error) ; 
-    }) ; 
+        }) ;
+    }
+     
 }
 // chuyển chữ in tiêng việt có dấu thành không dấu 
 function toNonAccentVietnamese(str) {
